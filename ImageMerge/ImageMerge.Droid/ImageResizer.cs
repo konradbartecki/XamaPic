@@ -15,23 +15,27 @@ namespace ImageMerge.Droid
         {
             var exifReader = new ExifReader(new MemoryStream(imageData));
             ushort orientation;
-
+            
             exifReader.GetTagValue(274, out orientation);
-
+            
             var rotation = GetRotation(orientation);
 
-            var options = new BitmapFactory.Options
+            Bitmap originalImage = BitmapFactory.DecodeByteArray(imageData, 0, imageData.Length);
+
+            double scale;
+            if (rotation == 90 || rotation == 270)
             {
-                InJustDecodeBounds = true
-            };
+                scale = size/originalImage.Height;
+            }
+            else
+            {
+                scale = size / originalImage.Width;
+            }
 
-            BitmapFactory.DecodeByteArray(imageData, 0, imageData.Length, options);
+            var dstHeight = originalImage.Height * scale;
+            var dstWidth = originalImage.Width * scale;
 
-            options.InJustDecodeBounds = false;
-
-            options.InSampleSize = GetScaleFactor(size, options);
-
-            var resizedImage = BitmapFactory.DecodeByteArray(imageData, 0, imageData.Length, options);
+            Bitmap resizedImage = Bitmap.CreateScaledBitmap(originalImage, (int) dstWidth, (int) dstHeight, false);
 
             using (var ms = new MemoryStream())
             {
@@ -40,10 +44,10 @@ namespace ImageMerge.Droid
                 var rotatedImage = rotation == 0
                     ? Bitmap.CreateBitmap(resizedImage, 0, 0, resizedImage.Width, resizedImage.Height)
                     : Bitmap.CreateBitmap(resizedImage, 0, 0, resizedImage.Width, resizedImage.Height, matrix, true);
-
+            
                 rotatedImage.Compress(Bitmap.CompressFormat.Jpeg, quality, ms);
                 resizedImage.Recycle();
-
+            
                 return Task.FromResult(ms.ToArray());
             }
         }
@@ -82,16 +86,6 @@ namespace ImageMerge.Droid
             }
         }
 
-        private static int GetScaleFactor(float size, BitmapFactory.Options options)
-        {
-            var biggerSide = options.OutHeight > options.OutWidth ? options.OutHeight : options.OutWidth;
-
-            var scale = size / biggerSide;
-            var height = (int)(options.OutHeight * scale);
-            var width = (int)(options.OutWidth * scale);
-            return CalculateInSampleSize(options, width, height);
-        }
-
         private static int CalculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight)
         {
             // Raw height and width of image
@@ -108,7 +102,7 @@ namespace ImageMerge.Droid
                 // height and width larger than the requested height and width.
                 while (halfHeight / inSampleSize > reqHeight && halfWidth / inSampleSize > reqWidth)
                 {
-                    inSampleSize *= 2;
+                    inSampleSize += 1;
                 }
             }
 
