@@ -41,7 +41,7 @@ namespace ImageMerge.Pages
             using (var stream = mediaFile.GetStream())
             {
                 var screenWidth = (float)ImageContainer.Width;
-                var byteImage = (await DependencyService.Get<IImageResizer>().ResizeImage(stream.ToByteArray(), screenWidth, 90));;
+                var byteImage = (await DependencyService.Get<IImageResizer>().ResizeImage(stream.ToByteArray(), screenWidth, 90)); ;
 
                 var faceServiceClient = new FaceServiceClient("f7ce003bec174227ac399308e8a1575e");
 
@@ -65,12 +65,22 @@ namespace ImageMerge.Pages
                     await Task.Delay(1000);
                     var featureCoordinate = face.FaceLandmarks.MouthRight;
 
-                    var d = featureCoordinate.X * ThugImage.Width /byteImage.ImageWidth ;
+                    var d = featureCoordinate.X * ThugImage.Width / byteImage.ImageWidth;
 
-                    var y = ThugImage.Height- featureCoordinate.Y*ThugImage.Height/byteImage.ImageHeight;
+                    var y = ThugImage.Height - featureCoordinate.Y * ThugImage.Height / byteImage.ImageHeight;
+
+                    var eyeLeftTop = face.FaceLandmarks.EyebrowLeftOuter;
+
+                    var xx = eyeLeftTop.X * ThugImage.Width / byteImage.ImageWidth;
+
+
+                    var yy = (ThugImage.Height - eyeLeftTop.Y*ThugImage.Height/byteImage.ImageHeight) + Cygaro.Height;
+                    Oksy.Opacity = 1;
+                    await CygaroY(Oksy, (int)xx, (int)yy);
 
                     Cygaro.Opacity = 1;
-                    await CygaroY(Cygaro,(int) d, (int)y);
+                    await CygaroY(Cygaro, (int)d, (int)y);
+
 
                 }
                 catch (Exception ex)
@@ -80,14 +90,10 @@ namespace ImageMerge.Pages
             }
         }
 
-        private bool was;
+
 
         private async Task CygaroY(Image item, int x, int y)
         {
-            if (was)
-                return;
-            was = true;
-
             var cygaroX = x  /*Cygaro.Width/2*/;
 
 
