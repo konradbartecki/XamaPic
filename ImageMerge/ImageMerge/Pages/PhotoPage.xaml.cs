@@ -61,6 +61,7 @@ namespace ImageMerge.Pages
 
 
                     ThugImage.Source = ImageSource.FromStream(() => new MemoryStream(byteImage));
+                    
                 }
                 catch (Exception ex)
                 {

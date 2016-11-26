@@ -11,7 +11,7 @@ namespace ImageMerge.UWP
 {
     public class ImageResizer : IImageResizer
     {
-        public async Task<byte[]> ResizeImage(byte[] imageData, float size, int quality)
+        public async Task<ImageData> ResizeImage(byte[] imageData, float size, int quality)
         {
             using (var sourceStream = await ConvertToRandomAccessStream(imageData))
             {
@@ -47,7 +47,7 @@ namespace ImageMerge.UWP
                 var resizedData = new byte[outputStream.Size];
                 await outputStream.ReadAsync(resizedData.AsBuffer(), (uint)outputStream.Size, InputStreamOptions.None);
 
-                return resizedData;
+                return new ImageData(unchecked((int)finalWidth), unchecked((int)finalHeight), resizedData);
             }
         }
 

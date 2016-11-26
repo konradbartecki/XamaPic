@@ -10,7 +10,7 @@ namespace ImageMerge.iOS
 {
     public class ImageResizer : IImageResizer
     {
-        public Task<byte[]> ResizeImage(byte[] imageData, float size, int quality)
+        public Task<ImageData> ResizeImage(byte[] imageData, float size, int quality)
         {
             var originalImage = ImageFromByteArray(imageData);
             var orientation = originalImage.Orientation;
@@ -46,9 +46,10 @@ namespace ImageMerge.iOS
                 var resizedImage = UIImage.FromImage(context.ToImage(), 0, orientation);
 
                 var scaleAndRotateImage = ScaleAndRotateImage(resizedImage, orientation);
+                
 
                 // save the image as a jpeg
-                return Task.FromResult(scaleAndRotateImage.AsJPEG(quality / 100.0f).ToArray());
+                return Task.FromResult(new ImageData((int)scaleAndRotateImage.CGImage.Width, (int) scaleAndRotateImage.CGImage.Height, scaleAndRotateImage.AsJPEG(quality / 100.0f).ToArray()));
             }
         }
 
