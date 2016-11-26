@@ -41,6 +41,7 @@
     <Compile Include="Enums\ImageServiceError.cs" />
     <Compile Include="Exceptions\PhotoNotTakenException.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="ImageData.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

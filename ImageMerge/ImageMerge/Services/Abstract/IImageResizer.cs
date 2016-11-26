@@ -4,6 +4,6 @@ namespace ImageMerge.Services.Abstract
 {
     public interface IImageResizer
     {
-        Task<byte[]> ResizeImage(byte[] imageData, float size, int quality);
+        Task<ImageData> ResizeImage(byte[] imageData, float size, int quality);
     }
 }

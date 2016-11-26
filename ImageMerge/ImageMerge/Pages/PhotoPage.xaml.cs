@@ -62,8 +62,10 @@ namespace ImageMerge.Pages
 
                     ThugImage.Source = ImageSource.FromStream(() => new MemoryStream(byteImage));
 
+
                     Cygaro.Opacity = 1;
                     await CygaroY(Cygaro, 100, 100);
+
                 }
                 catch (Exception ex)
                 {

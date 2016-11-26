@@ -11,7 +11,7 @@ namespace ImageMerge.Droid
 {
     public class ImageResizer : IImageResizer
     {
-        public Task<byte[]> ResizeImage(byte[] imageData, float size, int quality)
+        public Task<ImageData> ResizeImage(byte[] imageData, float size, int quality)
         {
             var exifReader = new ExifReader(new MemoryStream(imageData));
             ushort orientation;
@@ -33,7 +33,7 @@ namespace ImageMerge.Droid
                 rotatedImage.Compress(Bitmap.CompressFormat.Jpeg, quality, ms);
                 originalImage.Recycle();
             
-                return Task.FromResult(ms.ToArray());
+                return Task.FromResult(new ImageData(rotatedImage.Width, rotatedImage.Height ,ms.ToArray()));
             }
         }
 
