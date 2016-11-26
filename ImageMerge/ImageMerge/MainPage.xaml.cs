@@ -13,12 +13,16 @@ namespace ImageMerge
         {
             InitializeComponent();
 
-            duda.PropertyChanged += Duda_PropertyChanged;
+            PropertyChanged += MainPage_PropertyChanged;
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+
+
+            cont.HeightRequest = Height;
+            cont.WidthRequest = WidthRequest;
 
             var dudaWidth = duda.Width;
 
@@ -29,7 +33,47 @@ namespace ImageMerge
 
             var realHeight = dudaHeight * 114 / 400;
 
-            await cygaro.TranslateTo((int)realPos, (int)realHeight, 1000u, Easing.BounceIn);
+            await cygaro.TranslateTo((int)realPos, (int)realHeight, 1000u, Easing.Linear);
+        }
+
+        /*  protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+
+           /* PropertyChanged += MainPage_PropertyChanged;
+
+            var dudaWidth = duda.Width;
+
+            var realPos = dudaWidth * 92 / 400;
+
+
+            var dudaHeight = duda.Height;
+
+            var realHeight = dudaHeight * 114 / 400;
+
+            await cygaro.TranslateTo((int)realPos, (int)realHeight, 1000u, Easing.BounceIn);#1#
+        }*/
+
+        private async void MainPage_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Height" && Width > 0 && Height > 0)
+            {
+                PropertyChanged += MainPage_PropertyChanged;
+
+                cont.HeightRequest = Height;
+                cont.WidthRequest = WidthRequest;
+
+                var dudaWidth = duda.Width;
+
+                var realPos = dudaWidth * 209 / 400;
+
+
+                var dudaHeight = duda.Height;
+
+                var realHeight = dudaHeight * 231 / 400;
+
+                await cygaro.TranslateTo((int)realPos, (int)realHeight, 1000u, Easing.Linear);
+            }
         }
 
         private async void Duda_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

@@ -7,13 +7,14 @@
   <Image x:Name="duda" Source="duda.png" ></Image>
   <Image HeightRequest="40" x:Name="cygaro" Source="cygaro.png"></Image>
 </StackLayout>-->
+  <StackLayout x:Name="cont">
  <AbsoluteLayout>
    
-   <Image x:Name="duda" Source="duda.png" Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0, 0, 400, 400" AbsoluteLayout.LayoutFlags="None"></Image>
-   <StackLayout x:Name="cygaro"  AbsoluteLayout.LayoutBounds="0,0, 30, 30" AbsoluteLayout.LayoutFlags="None">
+   <Image x:Name="duda" Source="duda.png" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="SizeProportional"></Image>
+   <StackLayout x:Name="cygaro"  AbsoluteLayout.LayoutBounds="1,1, 30, 30" AbsoluteLayout.LayoutFlags="None">
      <Image HeightRequest="40" WidthRequest="40" Aspect="AspectFit" Source="cygaro.png" ></Image>
    </StackLayout>
  </AbsoluteLayout>
-  
+  </StackLayout>
 
 </ContentPage>
