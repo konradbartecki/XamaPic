@@ -41,13 +41,13 @@ namespace ImageMerge.Pages
             using (var stream = mediaFile.GetStream())
             {
                 var screenWidth = (float)ImageContainer.Width;
-                var byteImage = await DependencyService.Get<IImageResizer>().ResizeImage(stream.ToByteArray(), screenWidth, 90);
+                var byteImage = (await DependencyService.Get<IImageResizer>().ResizeImage(stream.ToByteArray(), screenWidth, 90));;
 
                 var faceServiceClient = new FaceServiceClient("f7ce003bec174227ac399308e8a1575e");
 
                 try
                 {
-                    var faces = await faceServiceClient.DetectAsync(new MemoryStream(byteImage), true, true);
+                    var faces = await faceServiceClient.DetectAsync(new MemoryStream(byteImage.ImageBytes), true, true);
 
                     var face = faces.FirstOrDefault();
 
@@ -60,11 +60,17 @@ namespace ImageMerge.Pages
                     var rightEye = face.FaceLandmarks.PupilRight;
 
 
-                    ThugImage.Source = ImageSource.FromStream(() => new MemoryStream(byteImage));
+                    ThugImage.Source = ImageSource.FromStream(() => new MemoryStream(byteImage.ImageBytes));
 
+                    await Task.Delay(1000);
+                    var featureCoordinate = face.FaceLandmarks.MouthRight;
+
+                    var d = featureCoordinate.X * ThugImage.Width /byteImage.ImageWidth ;
+
+                    var y = ThugImage.Height- featureCoordinate.Y*ThugImage.Height/byteImage.ImageHeight;
 
                     Cygaro.Opacity = 1;
-                    await CygaroY(Cygaro, 100, 100);
+                    await CygaroY(Cygaro,(int) d, (int)y);
 
                 }
                 catch (Exception ex)
