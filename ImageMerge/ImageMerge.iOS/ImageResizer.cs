@@ -15,7 +15,7 @@ namespace ImageMerge.iOS
             var originalImage = ImageFromByteArray(imageData);
             var orientation = originalImage.Orientation;
 
-            var scale = size / originalImage.Size.Height;
+            var scale = size / originalImage.Size.Width;
 
             var height = (int)(originalImage.Size.Height * scale);
             var width = (int)(originalImage.Size.Width * scale);

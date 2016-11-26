@@ -16,7 +16,7 @@ namespace ImageMerge.UWP
             using (var sourceStream = await ConvertToRandomAccessStream(imageData))
             {
                 var decoder = await BitmapDecoder.CreateAsync(sourceStream);
-                var scale = size / decoder.PixelHeight;
+                var scale = size / decoder.PixelWidth;
                 var finalHeight = (uint)(decoder.PixelHeight * scale);
                 var finalWidth = (uint)(decoder.PixelWidth * scale);
                 var transform = new BitmapTransform
