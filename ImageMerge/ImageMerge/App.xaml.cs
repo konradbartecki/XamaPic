@@ -13,7 +13,7 @@ namespace ImageMerge
         {
             InitializeComponent();
 
-            MainPage = new PhotoPage();
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()

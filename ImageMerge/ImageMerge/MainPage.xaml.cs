@@ -13,7 +13,7 @@ namespace ImageMerge
         {
             InitializeComponent();
 
-            PropertyChanged += MainPage_PropertyChanged;
+            //PropertyChanged += MainPage_PropertyChanged;
         }
 
         protected async override void OnAppearing()
@@ -24,8 +24,7 @@ namespace ImageMerge
           /*  cont.HeightRequest = Height;
             cont.WidthRequest = WidthRequest;*/
 
-            await CygaroY(cygaro, 91, 116);
-            await CygaroY(oksy, 209, 143);
+           
 
 
 //            await cygaro.TranslateTo((int)oksy, (int)cygaroY, 1000u, Easing.Linear);
@@ -33,12 +32,29 @@ namespace ImageMerge
 
         }
 
+        protected override async void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+
+            if (width <= 0 && height <= 0)
+                return;
+            var d = duda.Width;
+
+            cont.WidthRequest = width;
+//            cont.HeightRequest = height
+
+
+
+            await CygaroY(cygaro, 207, 230);
+            await CygaroY(oksy, 100, 116);
+        }
+
         private async Task<double> CygaroY(StackLayout item, int x, int y)
         {
-            var cygaroX = duda.Width*x/400;
+            var cygaroX = x;
 
 
-            var cygaroY = duda.Height*y/400;
+            var cygaroY = y;
 
             await item.TranslateTo((int) cygaroX, (int) cygaroY, 1000u, Easing.Linear);
             return cygaroY;

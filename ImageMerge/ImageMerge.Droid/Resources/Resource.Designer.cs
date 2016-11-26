@@ -2020,15 +2020,8 @@ namespace ImageMerge.Droid
 			// aapt resource value: 0x7f020064
 			public const int ic_collapse_00004 = 2130837604;
 			
-			// aapt resource value: 0x7f020066
-			public const int notification_template_icon_bg = 2130837606;
-			
 			// aapt resource value: 0x7f020065
-<<<<<<< HEAD
-			public const int oksy = 2130837605;
-=======
 			public const int ic_collapse_00005 = 2130837605;
->>>>>>> a2bc471000af9bf89deb9acca5b434ebb425e702
 			
 			// aapt resource value: 0x7f020066
 			public const int ic_collapse_00006 = 2130837606;
@@ -2213,8 +2206,11 @@ namespace ImageMerge.Droid
 			// aapt resource value: 0x7f0200a2
 			public const int mr_ic_play_light = 2130837666;
 			
+			// aapt resource value: 0x7f0200a4
+			public const int notification_template_icon_bg = 2130837668;
+			
 			// aapt resource value: 0x7f0200a3
-			public const int notification_template_icon_bg = 2130837667;
+			public const int oksy = 2130837667;
 			
 			static Drawable()
 			{
