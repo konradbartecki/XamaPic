@@ -1858,8 +1858,11 @@ namespace ImageMerge.Droid
 			// aapt resource value: 0x7f020064
 			public const int mr_ic_settings_light = 2130837604;
 			
+			// aapt resource value: 0x7f020066
+			public const int notification_template_icon_bg = 2130837606;
+			
 			// aapt resource value: 0x7f020065
-			public const int notification_template_icon_bg = 2130837605;
+			public const int oksy = 2130837605;
 			
 			static Drawable()
 			{

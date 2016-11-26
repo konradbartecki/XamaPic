@@ -21,20 +21,29 @@ namespace ImageMerge
             base.OnAppearing();
 
 
-            cont.HeightRequest = Height;
-            cont.WidthRequest = WidthRequest;
+          /*  cont.HeightRequest = Height;
+            cont.WidthRequest = WidthRequest;*/
 
-            var dudaWidth = duda.Width;
+            await CygaroY(cygaro, 91, 116);
+            await CygaroY(oksy, 209, 143);
 
-            var realPos = dudaWidth * 92 / 400;
+
+//            await cygaro.TranslateTo((int)oksy, (int)cygaroY, 1000u, Easing.Linear);
 
 
-            var dudaHeight = duda.Height;
-
-            var realHeight = dudaHeight * 114 / 400;
-
-            await cygaro.TranslateTo((int)realPos, (int)realHeight, 1000u, Easing.Linear);
         }
+
+        private async Task<double> CygaroY(StackLayout item, int x, int y)
+        {
+            var cygaroX = duda.Width*x/400;
+
+
+            var cygaroY = duda.Height*y/400;
+
+            await item.TranslateTo((int) cygaroX, (int) cygaroY, 1000u, Easing.Linear);
+            return cygaroY;
+        }
+
 
         /*  protected async override void OnAppearing()
         {

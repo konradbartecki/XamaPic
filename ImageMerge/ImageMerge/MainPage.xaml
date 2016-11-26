@@ -3,18 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ImageMerge"
              x:Class="ImageMerge.MainPage">
-<!--<StackLayout>
+  <!--<StackLayout>
   <Image x:Name="duda" Source="duda.png" ></Image>
   <Image HeightRequest="40" x:Name="cygaro" Source="cygaro.png"></Image>
 </StackLayout>-->
   <StackLayout x:Name="cont">
- <AbsoluteLayout>
-   
-   <Image x:Name="duda" Source="duda.png" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="SizeProportional"></Image>
-   <StackLayout x:Name="cygaro"  AbsoluteLayout.LayoutBounds="1,1, 30, 30" AbsoluteLayout.LayoutFlags="None">
-     <Image HeightRequest="40" WidthRequest="40" Aspect="AspectFit" Source="cygaro.png" ></Image>
-   </StackLayout>
- </AbsoluteLayout>
+    <AbsoluteLayout>
+      <Image x:Name="duda" Source="duda.png" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="SizeProportional"></Image>
+      <StackLayout x:Name="cygaro"  AbsoluteLayout.LayoutBounds="1,1, 30, 30" AbsoluteLayout.LayoutFlags="None">
+        <Image HeightRequest="40" WidthRequest="40" Aspect="AspectFit" Source="cygaro.png" ></Image>
+      </StackLayout>
+
+      <StackLayout x:Name="oksy"  AbsoluteLayout.LayoutBounds="1,1, 30, 30" AbsoluteLayout.LayoutFlags="None">
+        <Image HeightRequest="40" WidthRequest="40" Aspect="AspectFit" Source="oksy.png" ></Image>
+      </StackLayout>
+    </AbsoluteLayout>
   </StackLayout>
 
 </ContentPage>
