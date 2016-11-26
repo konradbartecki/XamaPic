@@ -52,6 +52,7 @@
     <Compile Include="Resources.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="Services\Abstract\IImageResizer.cs" />
+    <Compile Include="Services\AudioService.cs" />
     <Compile Include="Services\ImageService.cs" />
     <Compile Include="Services\PhotoService.cs" />
   </ItemGroup>
