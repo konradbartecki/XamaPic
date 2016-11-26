@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ImageMerge.Extensions;
 using ImageMerge.Services;
 using ImageMerge.Services.Abstract;
+using Microsoft.ProjectOxford.Face;
 using Xamarin.Forms;
 
 namespace ImageMerge.Pages
@@ -40,10 +41,31 @@ namespace ImageMerge.Pages
             using (var stream = mediaFile.GetStream())
             {
                 var screenWidth = (float) ImageContainer.Width;
-                var byteArray =  await DependencyService.Get<IImageResizer>().ResizeImage(stream.ToByteArray(), screenWidth, 90);
+                var byteImage =  await DependencyService.Get<IImageResizer>().ResizeImage(stream.ToByteArray(), screenWidth, 90);
+
+                var faceServiceClient = new FaceServiceClient("f7ce003bec174227ac399308e8a1575e");
+
+                try
+                {
+                    var faces = await faceServiceClient.DetectAsync(new MemoryStream(byteImage), true, true);
+
+                    var face = faces.FirstOrDefault();
+
+                    if (face == null)
+                    {
+                        return;
+                    }
+
+                    var leftEye = face.FaceLandmarks.PupilLeft;
+                    var rightEye = face.FaceLandmarks.PupilRight;
 
 
-                ThugImage.Source = ImageSource.FromStream(() => new MemoryStream(byteArray));
+                    ThugImage.Source = ImageSource.FromStream(() => new MemoryStream(byteImage));
+                }
+                catch (Exception ex)
+                {
+                    
+                }
             }
         }
     }
