@@ -22,31 +22,16 @@ namespace ImageMerge.Droid
 
             Bitmap originalImage = BitmapFactory.DecodeByteArray(imageData, 0, imageData.Length);
 
-            double scale;
-            if (rotation == 90 || rotation == 270)
-            {
-                scale = size/originalImage.Height;
-            }
-            else
-            {
-                scale = size / originalImage.Width;
-            }
-
-            var dstHeight = originalImage.Height * scale;
-            var dstWidth = originalImage.Width * scale;
-
-            Bitmap resizedImage = Bitmap.CreateScaledBitmap(originalImage, (int) dstWidth, (int) dstHeight, false);
-
             using (var ms = new MemoryStream())
             {
                 var matrix = new Matrix();
                 matrix.PostRotate(rotation);
                 var rotatedImage = rotation == 0
-                    ? Bitmap.CreateBitmap(resizedImage, 0, 0, resizedImage.Width, resizedImage.Height)
-                    : Bitmap.CreateBitmap(resizedImage, 0, 0, resizedImage.Width, resizedImage.Height, matrix, true);
+                    ? Bitmap.CreateBitmap(originalImage, 0, 0, originalImage.Width, originalImage.Height)
+                    : Bitmap.CreateBitmap(originalImage, 0, 0, originalImage.Width, originalImage.Height, matrix, true);
             
                 rotatedImage.Compress(Bitmap.CompressFormat.Jpeg, quality, ms);
-                resizedImage.Recycle();
+                originalImage.Recycle();
             
                 return Task.FromResult(ms.ToArray());
             }

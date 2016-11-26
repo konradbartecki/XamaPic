@@ -5,7 +5,7 @@
              >
  <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
    <StackLayout x:Name="ImageContainer" HorizontalOptions="FillAndExpand">
-     <Image x:Name="ThugImage" HorizontalOptions="FillAndExpand"/>
+     <Image x:Name="ThugImage" Aspect="AspectFit" HorizontalOptions="FillAndExpand"/>
    </StackLayout>
    
    <Button HorizontalOptions="FillAndExpand" Clicked="Button_OnClicked" VerticalOptions="EndAndExpand" Text="Select Photo" FontSize="17" BackgroundColor="Gray" TextColor="White"/>
