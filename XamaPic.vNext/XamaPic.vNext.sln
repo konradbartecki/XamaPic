@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamaPic.vNext", "XamaPic.vNext\XamaPic.vNext.csproj", "{433AC062-01CD-426A-8360-B5CEDFE6B6DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamaPic.Utility", "XamaPic.Utility\XamaPic.Utility.csproj", "{1C7371E2-2B66-4B45-8BEB-3A7F5083DFE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamaPic.Server.Core", "XamaPic.Server.Core\XamaPic.Server.Core\XamaPic.Server.Core.csproj", "{67F638DF-999C-459D-B181-126B900FD741}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{433AC062-01CD-426A-8360-B5CEDFE6B6DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{433AC062-01CD-426A-8360-B5CEDFE6B6DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{433AC062-01CD-426A-8360-B5CEDFE6B6DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{433AC062-01CD-426A-8360-B5CEDFE6B6DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C7371E2-2B66-4B45-8BEB-3A7F5083DFE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C7371E2-2B66-4B45-8BEB-3A7F5083DFE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C7371E2-2B66-4B45-8BEB-3A7F5083DFE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C7371E2-2B66-4B45-8BEB-3A7F5083DFE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67F638DF-999C-459D-B181-126B900FD741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67F638DF-999C-459D-B181-126B900FD741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67F638DF-999C-459D-B181-126B900FD741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67F638DF-999C-459D-B181-126B900FD741}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
