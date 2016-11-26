@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using ImageMerge.Pages;
 using Xamarin.Forms;
 
 namespace ImageMerge
@@ -13,7 +13,7 @@ namespace ImageMerge
         {
             InitializeComponent();
 
-            MainPage = new ImageMerge.MainPage();
+            MainPage = new PhotoPage();
         }
 
         protected override void OnStart()
