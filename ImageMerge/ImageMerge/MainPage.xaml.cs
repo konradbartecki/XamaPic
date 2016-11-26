@@ -38,26 +38,32 @@ namespace ImageMerge
 
             if (width <= 0 && height <= 0)
                 return;
-            var d = duda.Width;
+//            var d = duda.Width;
 
             cont.WidthRequest = width;
 //            cont.HeightRequest = height
 
 
 
-            await CygaroY(cygaro, 207, 230);
-            await CygaroY(oksy, 100, 116);
+            await CygaroY(Cygaro, 207, 230);
+//            await CygaroY(oksy, 100, 116);
         }
 
-        private async Task<double> CygaroY(StackLayout item, int x, int y)
+        private bool was;
+
+        private async Task CygaroY(Image item, int x, int y)
         {
-            var cygaroX = x;
+            if (was)
+                return;
+            was = true;
+
+            var cygaroX = Duda.Width * x / 400  /*Cygaro.Width/2*/;
 
 
-            var cygaroY = y;
-
-            await item.TranslateTo((int) cygaroX, (int) cygaroY, 1000u, Easing.Linear);
-            return cygaroY;
+            var cygaroY = Duda.Height  - (Duda.Height*y/400); /*+ Cygaro.Height/2*/;
+          
+            await item.TranslateTo((int) cygaroX, (int) -cygaroY, 1000u, Easing.Linear);
+           
         }
 
 
@@ -79,43 +85,6 @@ namespace ImageMerge
             await cygaro.TranslateTo((int)realPos, (int)realHeight, 1000u, Easing.BounceIn);#1#
         }*/
 
-        private async void MainPage_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "Height" && Width > 0 && Height > 0)
-            {
-                PropertyChanged += MainPage_PropertyChanged;
-
-                cont.HeightRequest = Height;
-                cont.WidthRequest = WidthRequest;
-
-                var dudaWidth = duda.Width;
-
-                var realPos = dudaWidth * 209 / 400;
-
-
-                var dudaHeight = duda.Height;
-
-                var realHeight = dudaHeight * 231 / 400;
-
-                await cygaro.TranslateTo((int)realPos, (int)realHeight, 1000u, Easing.Linear);
-            }
-        }
-
-        private async void Duda_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "Width" && duda.Width > 0 && duda.Height > 0)
-            {
-                var dudaWidth = duda.Width;
-
-                var realPos = dudaWidth * 92 / 400;
-
-
-                var dudaHeight = duda.Height;
-
-                var realHeight = dudaHeight * 130 / 400;
-
-                await cygaro.TranslateTo((int)realPos, (int)realHeight,1000u, Easing.BounceIn);
-            }
-        }
+     
     }
 }

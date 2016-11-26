@@ -8,16 +8,8 @@
   <Image HeightRequest="40" x:Name="cygaro" Source="cygaro.png"></Image>
 </StackLayout>-->
   <StackLayout x:Name="cont" BackgroundColor="Aqua">
-    <AbsoluteLayout>
-      <Image x:Name="duda" Source="duda.png" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="SizeProportional" BackgroundColor="Blue"></Image>
-      <StackLayout x:Name="cygaro" AbsoluteLayout.LayoutBounds="1,1, 30, 30" AbsoluteLayout.LayoutFlags="None">
-        <Image HeightRequest="40" WidthRequest="40" Aspect="AspectFit" Source="cygaro.png" ></Image>
-      </StackLayout>
-
-      <StackLayout x:Name="oksy" AbsoluteLayout.LayoutBounds="1,1, 200, 200" AbsoluteLayout.LayoutFlags="None">
-        <Image Aspect="AspectFit" Source="oksy.png" ></Image>
-      </StackLayout>
-    </AbsoluteLayout>
+    <Image x:Name="Duda" Source="duda.png"></Image>
+    <Image HorizontalOptions="Start" x:Name="Cygaro" HeightRequest="80" WidthRequest="80" Source="cygaro.png"></Image>
   </StackLayout>
 
 </ContentPage>
