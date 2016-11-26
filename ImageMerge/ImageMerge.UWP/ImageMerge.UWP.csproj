@@ -96,6 +96,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AudioServiceUwp.cs" />
     <Compile Include="ImageResizer.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -109,6 +110,7 @@
     <None Include="Windows_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\thuglife.mp3" />
     <Content Include="cygaro.png" />
     <Content Include="duda.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
