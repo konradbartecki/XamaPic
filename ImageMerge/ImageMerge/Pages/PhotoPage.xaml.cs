@@ -40,8 +40,8 @@ namespace ImageMerge.Pages
 
             using (var stream = mediaFile.GetStream())
             {
-                var screenWidth = (float) ImageContainer.Width;
-                var byteImage =  await DependencyService.Get<IImageResizer>().ResizeImage(stream.ToByteArray(), screenWidth, 90);
+                var screenWidth = (float)ImageContainer.Width;
+                var byteImage = await DependencyService.Get<IImageResizer>().ResizeImage(stream.ToByteArray(), screenWidth, 90);
 
                 var faceServiceClient = new FaceServiceClient("f7ce003bec174227ac399308e8a1575e");
 
@@ -61,12 +61,32 @@ namespace ImageMerge.Pages
 
 
                     ThugImage.Source = ImageSource.FromStream(() => new MemoryStream(byteImage));
+
+                    Cygaro.Opacity = 1;
+                    await CygaroY(Cygaro, 100, 100);
                 }
                 catch (Exception ex)
                 {
-                    
+
                 }
             }
+        }
+
+        private bool was;
+
+        private async Task CygaroY(Image item, int x, int y)
+        {
+            if (was)
+                return;
+            was = true;
+
+            var cygaroX = x  /*Cygaro.Width/2*/;
+
+
+            var cygaroY = y; /*+ Cygaro.Height/2*/;
+
+            await item.TranslateTo((int)cygaroX, (int)-cygaroY, 1000u, Easing.Linear);
+
         }
     }
 }
