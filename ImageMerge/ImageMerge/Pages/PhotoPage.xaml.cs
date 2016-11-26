@@ -69,12 +69,18 @@ namespace ImageMerge.Pages
 
                     var y = ThugImage.Height - featureCoordinate.Y * ThugImage.Height / byteImage.ImageHeight;
 
-                    var eyeLeftTop = face.FaceLandmarks.EyebrowLeftOuter;
+                    var eyeLeftTop = face.FaceLandmarks.PupilLeft;
+                    var eyeRIght = face.FaceLandmarks.PupilRight;
 
-                    var xx = eyeLeftTop.X * ThugImage.Width / byteImage.ImageWidth;
+                    var eyeCenterX =  eyeLeftTop.X + (eyeLeftTop.X - eyeRIght.Y )/2 -  161;
+                    var eyeCenterY = eyeRIght.Y; 
 
 
-                    var yy = (ThugImage.Height - eyeLeftTop.Y*ThugImage.Height/byteImage.ImageHeight) + Cygaro.Height;
+
+                    var xx = eyeCenterX * ThugImage.Width / byteImage.ImageWidth;
+
+
+                    var yy = (ThugImage.Height - eyeCenterY * ThugImage.Height / byteImage.ImageHeight) + Cygaro.Height;
                     Oksy.Opacity = 1;
                     await CygaroY(Oksy, (int)xx, (int)yy);
 
