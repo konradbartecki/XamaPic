@@ -15,8 +15,13 @@ namespace ImageMerge.Pages
 {
     public partial class PhotoPage : ContentPage
     {
-        public PhotoPage()
+        private readonly ImageData _data;
+        private readonly Face _face;
+
+        public PhotoPage(ImageData data, Face face)
         {
+            _data = data;
+            _face = face;
             InitializeComponent();
 
             if (Device.OS == TargetPlatform.iOS)
@@ -26,54 +31,21 @@ namespace ImageMerge.Pages
             }
         }
 
-        private async void Button_OnClicked(object sender, EventArgs e)
+        protected override async void OnAppearing()
         {
-            var imageService = new ImageService();
+            base.OnAppearing();
 
-            var imageResult = await imageService.GetImageOrTakePhoto();
+            ThugImage.Source = ImageSource.FromStream(() => new MemoryStream(_data.ImageBytes));
 
-            if (imageResult.Failure)
-            {
-                return;
-            }
+            await Task.Delay(1000);
 
-            var mediaFile = imageResult.Data;
+            AudioService.PlayAudio();
 
-            using (var stream = mediaFile.GetStream())
-            {
-                var screenWidth = (float)ImageContainer.Width;
-                var byteImage = (await DependencyService.Get<IImageResizer>().ResizeImage(stream.ToByteArray(), screenWidth, 90)); ;
+            await ShowCygaro(_face, _data);
 
-                var faceServiceClient = new FaceServiceClient("f7ce003bec174227ac399308e8a1575e");
+            await ShowOksy(_face, _data);
 
-                try
-                {
-                    var faces = await faceServiceClient.DetectAsync(new MemoryStream(byteImage.ImageBytes), true, true);
-
-                    var face = faces.FirstOrDefault();
-
-                    if (face == null)
-                    {
-                        return;
-                    }
-
-                    ThugImage.Source = ImageSource.FromStream(() => new MemoryStream(byteImage.ImageBytes));
-
-                    await Task.Delay(1000);
-
-                    AudioService.PlayAudio();
-
-                    await ShowCygaro(face, byteImage);
-
-                    await ShowOksy(face, byteImage);
-
-                    await ShowThugLife(face, byteImage);
-                }
-                catch (Exception ex)
-                {
-                    throw;
-                }
-            }
+            await ShowThugLife(_face, _data);
         }
 
         private async Task ShowOksy(Face face, ImageData byteImage)

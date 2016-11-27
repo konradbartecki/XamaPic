@@ -56,7 +56,7 @@ namespace ImageMerge.Pages
                         return;
                     }
 
-                    await Application.Current.MainPage.Navigation.PushAsync(new PhotoPage(/*byteImage, face*/));
+                    await Application.Current.MainPage.Navigation.PushAsync(new PhotoPage(byteImage, face));
                 }
                 catch (Exception ex)
                 {
