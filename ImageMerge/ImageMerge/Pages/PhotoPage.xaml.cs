@@ -13,7 +13,7 @@ using Xamarin.Forms;
 
 namespace ImageMerge.Pages
 {
-    public partial class PhotoPage : ContentPage
+    public partial class PhotoPage
     {
         private readonly ImageData _data;
         private readonly Face _face;
@@ -66,13 +66,17 @@ namespace ImageMerge.Pages
 
             const int basicPupilDistance = 85;
 
-            var scale =   eyeOffset / basicPupilDistance;
+            var scale = (eyeOffset / basicPupilDistance) * ThugImage.Height / byteImage.ImageHeight;
+
+            Device.OnPlatform(
+                null,
+                () => scale = - scale,
+                null);
 
             Oksy.WidthRequest = Oksy.WidthRequest * scale;
 
             oksyCenterPoint = (int)(oksyCenterPoint * scale); 
-
-
+            
             var eyesCenterX = eyeLeft.X + eyeOffset / 2 - oksyCenterPoint;
             var eyesCenterY = eyeRight.Y;
 
@@ -82,8 +86,9 @@ namespace ImageMerge.Pages
             
             await TranslateScaled(Oksy, (int)xx, (int)yy, 20u);
             await TranslateScaled(Oksy, (int)xx, (int)ImageContainer.Height, 20u);
-            
+
             Oksy.Opacity = 1;
+
             await TranslateScaled(Oksy, (int)xx, (int)yy);
         }
 
