@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XamaPic.Mobile"
+             x:Class="XamaPic.Mobile.MainPage">
+
+  <StackLayout>
+    <Label Text="Welcome to XamaPic!"
+         VerticalOptions="Center"
+         HorizontalOptions="Center" />
+    <StackLayout Orientation="Horizontal">
+      <Label Text="Front camera" VerticalOptions="Center"/>
+      <Switch x:Name="FrontCameraSwitch"/>
+      <Button Text="Take picture" Clicked="Button_OnClicked" BorderColor="Orange"/>
+      <Label Text="Status: Idle" x:Name="StatusLabel"/>
+    </StackLayout>
+    <Image x:Name="Img" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+  </StackLayout>
+</ContentPage>
