@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Threading.Tasks;
 using CoreGraphics;
 using ImageMerge.iOS;
@@ -46,10 +47,24 @@ namespace ImageMerge.iOS
                 var resizedImage = UIImage.FromImage(context.ToImage(), 0, orientation);
 
                 var scaleAndRotateImage = ScaleAndRotateImage(resizedImage, orientation);
-                
+
+                scaleAndRotateImage = ConvertToGrayScale(scaleAndRotateImage);
 
                 // save the image as a jpeg
                 return Task.FromResult(new ImageData((int)scaleAndRotateImage.CGImage.Width, (int) scaleAndRotateImage.CGImage.Height, scaleAndRotateImage.AsJPEG(quality / 100.0f).ToArray()));
+            }
+        }
+
+        private UIImage ConvertToGrayScale(UIImage image)
+        {
+            var sizeF = new SizeF {Height = (float) image.Size.Height, Width = (float) image.Size.Width};
+            RectangleF imageRect = new RectangleF(PointF.Empty, sizeF);
+            using (var colorSpace = CGColorSpace.CreateDeviceGray())
+            using (var context = new CGBitmapContext(IntPtr.Zero, (int)imageRect.Width, (int)imageRect.Height, 8, 0, colorSpace, CGImageAlphaInfo.None))
+            {
+                context.DrawImage(imageRect, image.CGImage);
+                using (var imageRef = context.ToImage())
+                    return new UIImage(imageRef);
             }
         }
 

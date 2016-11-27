@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
@@ -30,10 +31,14 @@ namespace ImageMerge.UWP
                     transform,
                     ExifOrientationMode.RespectExifOrientation,
                     ColorManagementMode.DoNotColorManage);
-
+                
                 var outputStream = new InMemoryRandomAccessStream();
 
                 var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, outputStream);
+
+                var pixels = pixelData.DetachPixelData();
+                pixels = ConverToGrayscale(pixels);
+
                 encoder.SetPixelData(
                     BitmapPixelFormat.Rgba8,
                     BitmapAlphaMode.Premultiplied,
@@ -41,14 +46,38 @@ namespace ImageMerge.UWP
                     finalHeight,
                     96,
                     96,
-                    pixelData.DetachPixelData());
+                    pixels);
                 await encoder.FlushAsync();
 
                 var resizedData = new byte[outputStream.Size];
                 await outputStream.ReadAsync(resizedData.AsBuffer(), (uint)outputStream.Size, InputStreamOptions.None);
+                
 
                 return new ImageData(unchecked((int)finalWidth), unchecked((int)finalHeight), resizedData);
             }
+        }
+
+        private byte[] ConverToGrayscale(byte[] srcPixels)
+        {
+            byte[] dstPixels = new byte[srcPixels.Length];
+
+            for (int i = 0; i < srcPixels.Length; i += 4)
+            {
+                double b = (double)srcPixels[i] / 255.0;
+                double g = (double)srcPixels[i + 1] / 255.0;
+                double r = (double)srcPixels[i + 2] / 255.0;
+
+                byte a = srcPixels[i + 3];
+
+                double e = (0.21 * r + 0.71 * g + 0.07 * b) * 255;
+                byte f = Convert.ToByte(e);
+
+                dstPixels[i] = f;
+                dstPixels[i + 1] = f;
+                dstPixels[i + 2] = f;
+                dstPixels[i + 3] = a;
+            }
+            return dstPixels;
         }
 
         private static async Task<IRandomAccessStream> ConvertToRandomAccessStream(byte[] data)
