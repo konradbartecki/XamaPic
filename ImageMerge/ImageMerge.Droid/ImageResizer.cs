@@ -22,6 +22,8 @@ namespace ImageMerge.Droid
 
             Bitmap originalImage = BitmapFactory.DecodeByteArray(imageData, 0, imageData.Length);
 
+            originalImage = ToGrayscale(originalImage);
+
             using (var ms = new MemoryStream())
             {
                 var matrix = new Matrix();
@@ -35,6 +37,22 @@ namespace ImageMerge.Droid
             
                 return Task.FromResult(new ImageData(rotatedImage.Width, rotatedImage.Height ,ms.ToArray()));
             }
+        }
+
+        public Bitmap ToGrayscale(Bitmap bmpOriginal)
+        {
+            var height = bmpOriginal.Height;
+            var width = bmpOriginal.Width;
+
+            var bmpGrayscale = Bitmap.CreateBitmap(width, height, Bitmap.Config.Argb8888);
+            var c = new Canvas(bmpGrayscale);
+            var paint = new Paint();
+            var cm = new ColorMatrix();
+            cm.SetSaturation(0);
+            var f = new ColorMatrixColorFilter(cm);
+            paint.SetColorFilter(f);
+            c.DrawBitmap(bmpOriginal, 0, 0, paint);
+            return bmpGrayscale;
         }
 
         private static int GetRotation(int orientation)
