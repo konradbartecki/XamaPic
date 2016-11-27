@@ -12,6 +12,8 @@
     </Grid.RowDefinitions>
     
     <Image Grid.Row ="1" Source="thugLife.png" Aspect="AspectFit" HorizontalOptions="Center"/>
+    <ActivityIndicator x:Name="ActivityIndicator" IsRunning="True" Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Color="Black" BackgroundColor="Transparent" Opacity="0" />
+    
     <Button x:Name="PhotoButton" Grid.Row ="3" Clicked="Button_OnClicked" Text="Select photo" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="17" BackgroundColor="Gray" TextColor="White"/>
     
   </Grid>

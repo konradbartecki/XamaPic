@@ -18,6 +18,8 @@ namespace ImageMerge.Pages
         {
             InitializeComponent();
 
+            NavigationPage.SetHasNavigationBar(this, false);
+
             if (Device.OS == TargetPlatform.iOS)
             {
                 Padding = new Thickness(0, 20, 0, 0);
@@ -35,6 +37,8 @@ namespace ImageMerge.Pages
             {
                 return;
             }
+
+            ActivityIndicator.Opacity = 1;
 
             var mediaFile = imageResult.Data;
 
@@ -61,6 +65,10 @@ namespace ImageMerge.Pages
                 catch (Exception ex)
                 {
                     throw;
+                }
+                finally
+                {
+                    ActivityIndicator.Opacity = 0;
                 }
             }
         }

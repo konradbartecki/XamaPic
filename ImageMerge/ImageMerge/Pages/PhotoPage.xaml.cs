@@ -24,6 +24,8 @@ namespace ImageMerge.Pages
             _face = face;
             InitializeComponent();
 
+            NavigationPage.SetHasNavigationBar(this, false);
+
             if (Device.OS == TargetPlatform.iOS)
             {
                 Padding = new Thickness(0, 20, 0, 0);
