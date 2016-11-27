@@ -8,6 +8,7 @@ using ImageMerge.Extensions;
 using ImageMerge.Services;
 using ImageMerge.Services.Abstract;
 using Microsoft.ProjectOxford.Face;
+using Microsoft.ProjectOxford.Face.Contract;
 using Xamarin.Forms;
 
 namespace ImageMerge.Pages
@@ -56,49 +57,51 @@ namespace ImageMerge.Pages
                         return;
                     }
 
-                    var leftEye = face.FaceLandmarks.PupilLeft;
-                    var rightEye = face.FaceLandmarks.PupilRight;
-
-
                     ThugImage.Source = ImageSource.FromStream(() => new MemoryStream(byteImage.ImageBytes));
 
                     await Task.Delay(1000);
-                    var featureCoordinate = face.FaceLandmarks.MouthRight;
 
-                    var d = featureCoordinate.X * ThugImage.Width / byteImage.ImageWidth;
+                    await ShowCygaro(face, byteImage);
 
-                    var y = ThugImage.Height - featureCoordinate.Y * ThugImage.Height / byteImage.ImageHeight;
-
-                    var eyeLeftTop = face.FaceLandmarks.PupilLeft;
-                    var eyeRIght = face.FaceLandmarks.PupilRight;
-
-                    var eyeCenterX =  eyeLeftTop.X + (eyeLeftTop.X - eyeRIght.Y )/2 -  161;
-                    var eyeCenterY = eyeRIght.Y; 
-
-
-
-                    var xx = eyeCenterX * ThugImage.Width / byteImage.ImageWidth;
-
-
-                    var yy = (ThugImage.Height - eyeCenterY * ThugImage.Height / byteImage.ImageHeight) + Cygaro.Height;
-                    Oksy.Opacity = 1;
-                    await CygaroY(Oksy, (int)xx, (int)yy);
-
-                    Cygaro.Opacity = 1;
-                    await CygaroY(Cygaro, (int)d, (int)y);
-
-
+                    await ShowOksy(face, byteImage);
                 }
                 catch (Exception ex)
                 {
-
+                    throw;
                 }
             }
         }
 
+        private async Task ShowOksy(Face face, ImageData byteImage)
+        {
+            var eyeLeft = face.FaceLandmarks.PupilLeft;
+            var eyeRight = face.FaceLandmarks.PupilRight;
+
+            const int oksyCenterPoint = 161;
+            var eyesCenterX = eyeLeft.X + (eyeLeft.X - eyeRight.X) / 2 - oksyCenterPoint;
+            var eyesCenterY = eyeRight.Y;
+
+            var xx = eyesCenterX * ThugImage.Width / byteImage.ImageWidth;
+
+            var yy =  ThugImage.Height - eyesCenterY * ThugImage.Height / byteImage.ImageHeight + Cygaro.Height;
+            Oksy.Opacity = 1;
+            await TranslateScaled(Oksy, (int)xx, (int)yy);
+        }
+
+        private async Task ShowCygaro(Face face, ImageData byteImage)
+        {
+            var mouth = face.FaceLandmarks.MouthRight;
+
+            var mouthX = mouth.X * ThugImage.Width / byteImage.ImageWidth;
+
+            var mouthY = ThugImage.Height - mouth.Y * ThugImage.Height / byteImage.ImageHeight;
+
+            Cygaro.Opacity = 1;
+            await TranslateScaled(Cygaro, (int)mouthX, (int)mouthY);
+        }
 
 
-        private async Task CygaroY(Image item, int x, int y)
+        private async Task TranslateScaled(Image item, int x, int y)
         {
             var cygaroX = x  /*Cygaro.Width/2*/;
 

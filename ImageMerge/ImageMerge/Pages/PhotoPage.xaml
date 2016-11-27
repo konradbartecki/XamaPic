@@ -6,7 +6,7 @@
  <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
    <StackLayout x:Name="ImageContainer" HorizontalOptions="FillAndExpand">
      <Image x:Name="ThugImage" Aspect="AspectFit" HorizontalOptions="FillAndExpand"/>
-     <Image HorizontalOptions="Start" x:Name="Cygaro"  HeightRequest="80" WidthRequest="80" Source="cygaro.png"></Image>
+     <Image HorizontalOptions="Start" x:Name="Cygaro"  HeightRequest="80" Aspect="AspectFit" Source="cygaro.png"></Image>
      <Image HorizontalOptions="Start" x:Name="Oksy" Aspect="AspectFit" WidthRequest="250" Source="oksy.png" ></Image>
    </StackLayout>
    
