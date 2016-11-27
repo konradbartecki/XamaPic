@@ -59,6 +59,7 @@ namespace ImageMerge.Pages
 
                     if (face == null)
                     {
+                        await Application.Current.MainPage.DisplayAlert("Error", "404: face not found", "ok");
                         return;
                     }
 
@@ -66,7 +67,7 @@ namespace ImageMerge.Pages
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    await Application.Current.MainPage.DisplayAlert("Error", "404: internet not found", "ok");
                 }
                 finally
                 {

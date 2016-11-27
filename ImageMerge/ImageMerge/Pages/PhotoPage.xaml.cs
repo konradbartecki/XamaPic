@@ -89,14 +89,18 @@ namespace ImageMerge.Pages
         {
             var mouth = face.FaceRectangle;
             int y = 0;
-            if (mouth.Top > byteImage.ImageHeight - (mouth.Top + mouth.Height))
+            // decided to use only upper one
+          /*  if (mouth.Top > byteImage.ImageHeight - (mouth.Top + mouth.Height))
             {
                 y = (int)ThugImage.Height - 20;
             }
             else
             {
                 y = 70 + (int)TsTekst.Height;
-            }
+            }*/
+
+            y = (int)ThugImage.Height - 20;
+
             var mouthX = ThugImage.Width / 2 - TsTekst.Width / 2;
 
             y += (int)Cygaro.Height + (int)Oksy.Height;
