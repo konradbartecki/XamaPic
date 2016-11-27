@@ -58,9 +58,9 @@ namespace ImageMerge.Pages
             double eyeOffset = 0;
 
             Device.OnPlatform(
-                () => eyeOffset = eyeLeft.X - eyeRight.X,
                 () => eyeOffset = eyeRight.X - eyeLeft.X,
-                () => eyeOffset = eyeLeft.X - eyeRight.X);
+                () => eyeOffset = eyeLeft.X - eyeRight.X,
+                () => eyeOffset = eyeRight.X - eyeLeft.X);
 
             const int oksyCenterPoint = 161;
             var eyesCenterX = eyeLeft.X + eyeOffset / 2 - oksyCenterPoint;
