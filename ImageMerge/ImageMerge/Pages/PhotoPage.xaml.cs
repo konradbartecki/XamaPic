@@ -88,6 +88,7 @@ namespace ImageMerge.Pages
             var yy =  ThugImage.Height - eyesCenterY * ThugImage.Height / byteImage.ImageHeight + Cygaro.Height + 50;
             Oksy.Opacity = 1;
             await TranslateScaled(Oksy, (int)xx, (int)yy);
+            await TranslateScaled(Oksy, (int)xx, (int)yy);
         }
 
         private async Task ShowCygaro(Face face, ImageData byteImage)
