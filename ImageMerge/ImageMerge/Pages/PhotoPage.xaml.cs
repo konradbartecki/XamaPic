@@ -61,6 +61,8 @@ namespace ImageMerge.Pages
 
                     await Task.Delay(1000);
 
+                    AudioService.PlayAudio();
+
                     await ShowCygaro(face, byteImage);
 
                     await ShowOksy(face, byteImage);
@@ -83,7 +85,7 @@ namespace ImageMerge.Pages
 
             var xx = eyesCenterX * ThugImage.Width / byteImage.ImageWidth;
 
-            var yy =  ThugImage.Height - eyesCenterY * ThugImage.Height / byteImage.ImageHeight + Cygaro.Height;
+            var yy =  ThugImage.Height - eyesCenterY * ThugImage.Height / byteImage.ImageHeight + Cygaro.Height + 50;
             Oksy.Opacity = 1;
             await TranslateScaled(Oksy, (int)xx, (int)yy);
         }
