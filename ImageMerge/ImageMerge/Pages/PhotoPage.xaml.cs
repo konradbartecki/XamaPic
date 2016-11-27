@@ -66,6 +66,8 @@ namespace ImageMerge.Pages
                     await ShowCygaro(face, byteImage);
 
                     await ShowOksy(face, byteImage);
+
+                    await ShowThugLife(face, byteImage);
                 }
                 catch (Exception ex)
                 {
@@ -85,10 +87,11 @@ namespace ImageMerge.Pages
 
             var xx = eyesCenterX * ThugImage.Width / byteImage.ImageWidth;
 
-            var yy =  ThugImage.Height - eyesCenterY * ThugImage.Height / byteImage.ImageHeight + Cygaro.Height + 50;
+            var yy = ThugImage.Height - eyesCenterY * ThugImage.Height / byteImage.ImageHeight + Cygaro.Height + 50;
             Oksy.Opacity = 1;
             await TranslateScaled(Oksy, (int)xx, (int)yy);
-            await TranslateScaled(Oksy, (int)xx, (int)yy);
+
+
         }
 
         private async Task ShowCygaro(Face face, ImageData byteImage)
@@ -101,6 +104,26 @@ namespace ImageMerge.Pages
 
             Cygaro.Opacity = 1;
             await TranslateScaled(Cygaro, (int)mouthX, (int)mouthY);
+        }
+
+        private async Task ShowThugLife(Face face, ImageData byteImage)
+        {
+            var mouth = face.FaceRectangle;
+            int y = 0;
+            if (mouth.Top > byteImage.ImageHeight - (mouth.Top + mouth.Height))
+            {
+                y = (int)ThugImage.Height - 20;
+            }
+            else
+            {
+                y = 70 + (int)TsTekst.Height;
+            }
+            var mouthX = ThugImage.Width / 2 - TsTekst.Width / 2;
+
+            y += (int)Cygaro.Height + (int)Oksy.Height;
+
+            Cygaro.Opacity = 1;
+            await TranslateScaled(TsTekst, (int)mouthX, (int)y);
         }
 
 
