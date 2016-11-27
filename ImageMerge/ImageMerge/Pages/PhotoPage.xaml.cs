@@ -55,8 +55,15 @@ namespace ImageMerge.Pages
             var eyeLeft = face.FaceLandmarks.PupilLeft;
             var eyeRight = face.FaceLandmarks.PupilRight;
 
+            double eyeOffset = 0;
+
+            Device.OnPlatform(
+                () => eyeOffset = eyeLeft.X - eyeRight.X,
+                () => eyeOffset = eyeRight.X - eyeLeft.X,
+                () => eyeOffset = eyeLeft.X - eyeRight.X);
+
             const int oksyCenterPoint = 161;
-            var eyesCenterX = eyeLeft.X + (eyeLeft.X - eyeRight.X) / 2 - oksyCenterPoint;
+            var eyesCenterX = eyeLeft.X + eyeOffset / 2 - oksyCenterPoint;
             var eyesCenterY = eyeRight.Y;
 
             var xx = eyesCenterX * ThugImage.Width / byteImage.ImageWidth;
@@ -64,8 +71,6 @@ namespace ImageMerge.Pages
             var yy = ThugImage.Height - eyesCenterY * ThugImage.Height / byteImage.ImageHeight + Cygaro.Height + 50;
             Oksy.Opacity = 1;
             await TranslateScaled(Oksy, (int)xx, (int)yy);
-
-
         }
 
         private async Task ShowCygaro(Face face, ImageData byteImage)
