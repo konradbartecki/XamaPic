@@ -24,12 +24,15 @@ namespace ImageMerge.Pages
             _face = face;
             InitializeComponent();
 
-            NavigationPage.SetHasNavigationBar(this, false);
+            BackgroundColor = Color.White;
 
             if (Device.OS == TargetPlatform.iOS)
             {
                 Padding = new Thickness(0, 20, 0, 0);
-                BackgroundColor = Color.Black;
+            }
+            else
+            {
+                NavigationPage.SetHasNavigationBar(this, false);
             }
         }
 
@@ -63,6 +66,8 @@ namespace ImageMerge.Pages
                 () => eyeOffset = eyeRight.X - eyeLeft.X);
 
             var oksyCenterPoint = 150;
+
+            Device.OnPlatform(() => oksyCenterPoint = 300);
 
             const int basicPupilDistance = 85;
 

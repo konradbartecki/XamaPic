@@ -13,6 +13,7 @@ namespace ImageMerge.iOS
     {
         public Task<ImageData> ResizeImage(byte[] imageData, float size, int quality)
         {
+            size = size*2;
             var originalImage = ImageFromByteArray(imageData);
             var orientation = originalImage.Orientation;
 

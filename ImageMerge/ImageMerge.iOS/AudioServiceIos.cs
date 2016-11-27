@@ -2,10 +2,11 @@
 using System.Threading.Tasks;
 using AVFoundation;
 using Foundation;
+using ImageMerge.iOS;
 using ImageMerge.Services;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(AudioService))]
+[assembly: Dependency(typeof(AudioServiceIos))]
 namespace ImageMerge.iOS
 {
     public class AudioServiceIos : IAudio
@@ -22,6 +23,7 @@ namespace ImageMerge.iOS
                 _player.FinishedPlaying += (object sender, AVStatusEventArgs e) => {
                                                                                        _player = null;
                 };
+                _player.PrepareToPlay();
                 _player.Play();
             });
         }

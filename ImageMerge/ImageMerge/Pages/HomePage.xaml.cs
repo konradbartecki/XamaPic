@@ -20,10 +20,11 @@ namespace ImageMerge.Pages
 
             NavigationPage.SetHasNavigationBar(this, false);
 
+            BackgroundColor = Color.White;
+
             if (Device.OS == TargetPlatform.iOS)
             {
                 Padding = new Thickness(0, 20, 0, 0);
-                BackgroundColor = Color.Black;
             }
         }
 
