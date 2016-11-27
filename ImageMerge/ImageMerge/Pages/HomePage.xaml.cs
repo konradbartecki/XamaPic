@@ -39,6 +39,8 @@ namespace ImageMerge.Pages
             }
 
             ActivityIndicator.Opacity = 1;
+            PhotoButton.Opacity = 0;
+            PhotoButton.IsEnabled = false;
 
             var mediaFile = imageResult.Data;
 
@@ -69,6 +71,8 @@ namespace ImageMerge.Pages
                 finally
                 {
                     ActivityIndicator.Opacity = 0;
+                    PhotoButton.Opacity = 1;
+                    PhotoButton.IsEnabled = true;
                 }
             }
         }
