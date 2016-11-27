@@ -122,7 +122,7 @@ namespace ImageMerge.Pages
 
             y += (int)Cygaro.Height + (int)Oksy.Height;
 
-            Cygaro.Opacity = 1;
+            TsTekst.Opacity = 1;
             await TranslateScaled(TsTekst, (int)mouthX, (int)y);
         }
 

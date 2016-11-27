@@ -6,9 +6,9 @@
  <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
    <StackLayout x:Name="ImageContainer" HorizontalOptions="FillAndExpand">
      <Image x:Name="ThugImage" Aspect="AspectFit" HorizontalOptions="FillAndExpand"/>
-     <Image HorizontalOptions="Start" x:Name="Cygaro"  HeightRequest="80" Aspect="AspectFit" Source="cygaro.png"></Image>
-     <Image HorizontalOptions="Start" x:Name="Oksy" Aspect="AspectFit" WidthRequest="250" Source="oksy.png" ></Image>
-     <Image HorizontalOptions="Start" x:Name="TsTekst" Aspect="AspectFit" WidthRequest="250" Source="tltext.png" ></Image>
+     <Image HorizontalOptions="Start" x:Name="Cygaro" Opacity="0"  HeightRequest="80" Aspect="AspectFit" Source="cygaro.png"></Image>
+     <Image HorizontalOptions="Start" x:Name="Oksy" Aspect="AspectFit" WidthRequest="250" Source="oksy.png" Opacity="0" ></Image>
+     <Image HorizontalOptions="Start" x:Name="TsTekst" Aspect="AspectFit" WidthRequest="250" Source="tltext.png" Opacity="0" ></Image>
    </StackLayout>
    
    <Button HorizontalOptions="FillAndExpand" Clicked="Button_OnClicked" VerticalOptions="EndAndExpand" Text="Select Photo" FontSize="17" BackgroundColor="Gray" TextColor="White"/>
