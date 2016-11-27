@@ -37,7 +37,7 @@ namespace ImageMerge.UWP
                 var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, outputStream);
 
                 var pixels = pixelData.DetachPixelData();
-                pixels = ConverToGrayscale(pixels);
+                //pixels = ConverToGrayscale(pixels);
 
                 encoder.SetPixelData(
                     BitmapPixelFormat.Rgba8,

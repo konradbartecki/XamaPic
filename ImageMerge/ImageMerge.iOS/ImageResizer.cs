@@ -48,7 +48,7 @@ namespace ImageMerge.iOS
 
                 var scaleAndRotateImage = ScaleAndRotateImage(resizedImage, orientation);
 
-                scaleAndRotateImage = ConvertToGrayScale(scaleAndRotateImage);
+                //scaleAndRotateImage = ConvertToGrayScale(scaleAndRotateImage);
 
                 // save the image as a jpeg
                 return Task.FromResult(new ImageData((int)scaleAndRotateImage.CGImage.Width, (int) scaleAndRotateImage.CGImage.Height, scaleAndRotateImage.AsJPEG(quality / 100.0f).ToArray()));

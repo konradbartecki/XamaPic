@@ -22,7 +22,7 @@ namespace ImageMerge.Droid
 
             Bitmap originalImage = BitmapFactory.DecodeByteArray(imageData, 0, imageData.Length);
 
-            originalImage = ToGrayscale(originalImage);
+            //originalImage = ToGrayscale(originalImage);
 
             using (var ms = new MemoryStream())
             {
