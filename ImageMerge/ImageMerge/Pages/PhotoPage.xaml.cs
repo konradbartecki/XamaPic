@@ -62,13 +62,27 @@ namespace ImageMerge.Pages
                 () => eyeOffset = eyeLeft.X - eyeRight.X,
                 () => eyeOffset = eyeRight.X - eyeLeft.X);
 
-            const int oksyCenterPoint = 161;
+            var oksyCenterPoint = 150;
+
+            const int basicPupilDistance = 85;
+
+            var scale =   eyeOffset / basicPupilDistance;
+
+            Oksy.WidthRequest = Oksy.WidthRequest * scale;
+
+            oksyCenterPoint = (int)(oksyCenterPoint * scale); 
+
+
             var eyesCenterX = eyeLeft.X + eyeOffset / 2 - oksyCenterPoint;
             var eyesCenterY = eyeRight.Y;
 
             var xx = eyesCenterX * ThugImage.Width / byteImage.ImageWidth;
 
-            var yy = ThugImage.Height - eyesCenterY * ThugImage.Height / byteImage.ImageHeight + Cygaro.Height + 50;
+            var yy = ThugImage.Height - eyesCenterY * ThugImage.Height / byteImage.ImageHeight + Cygaro.Height + (40 * scale);
+            
+            await TranslateScaled(Oksy, (int)xx, (int)yy, 20u);
+            await TranslateScaled(Oksy, (int)xx, (int)ImageContainer.Height, 20u);
+            
             Oksy.Opacity = 1;
             await TranslateScaled(Oksy, (int)xx, (int)yy);
         }
@@ -80,6 +94,10 @@ namespace ImageMerge.Pages
             var mouthX = mouth.X * ThugImage.Width / byteImage.ImageWidth;
 
             var mouthY = ThugImage.Height - mouth.Y * ThugImage.Height / byteImage.ImageHeight;
+
+            await TranslateScaled(Cygaro, (int)mouthX, (int)mouthY, 20u);
+
+            await TranslateScaled(Cygaro, (int)ImageContainer.Width, (int)mouthY, 20u);
 
             Cygaro.Opacity = 1;
             await TranslateScaled(Cygaro, (int)mouthX, (int)mouthY);
@@ -110,14 +128,14 @@ namespace ImageMerge.Pages
         }
 
 
-        private async Task TranslateScaled(Image item, int x, int y)
+        private async Task TranslateScaled(Image item, int x, int y, uint time = 1000u)
         {
             var cygaroX = x  /*Cygaro.Width/2*/;
 
 
             var cygaroY = y; /*+ Cygaro.Height/2*/;
 
-            await item.TranslateTo((int)cygaroX, (int)-cygaroY, 1000u, Easing.Linear);
+            await item.TranslateTo((int)cygaroX, (int)-cygaroY, time, Easing.Linear);
 
         }
     }
