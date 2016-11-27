@@ -10,8 +10,5 @@
      <Image HorizontalOptions="Start" x:Name="Oksy" Aspect="AspectFit" WidthRequest="250" Source="oksy.png" Opacity="0" ></Image>
      <Image HorizontalOptions="Start" x:Name="TsTekst" Aspect="AspectFit" WidthRequest="250" Source="tltext.png" Opacity="0" ></Image>
    </StackLayout>
-   
-   <Button HorizontalOptions="FillAndExpand" Clicked="Button_OnClicked" VerticalOptions="EndAndExpand" Text="Select Photo" FontSize="17" BackgroundColor="Gray" TextColor="White"/>
-  
  </StackLayout>
 </ContentPage>
